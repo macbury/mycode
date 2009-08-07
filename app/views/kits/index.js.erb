@@ -1,0 +1,5 @@
+$('#tools').empty().append('<%= escape_javascript(render(:partial => @tools)) %>');
+$('.pagination').remove();
+<% if @tools.total_pages > @tools.current_page %>
+$('#tools').after('<%= escape_javascript(will_paginate(@tools)) %>');
+<% end %>

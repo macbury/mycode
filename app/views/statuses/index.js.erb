@@ -1,0 +1,7 @@
+<% @grupy_statusow.each do |dzien, statusy| %>
+	<% for status in statusy %>
+		addStatus(<%= status.id %>, '<%= escape_javascript(render(:partial => status)) %>', <%= dzien.to_date.to_s(:number) %>, '<%= day_title(dzien) %>', true);
+	<% end %>
+<% end %>
+last_update = <%= @time.to_s(:number) %>;
+getStatuses();

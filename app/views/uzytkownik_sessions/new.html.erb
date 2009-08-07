@@ -1,0 +1,18 @@
+<div class="logowanie">
+	<% form_for @uzytkownik_session do |f| %>
+	  <p>
+	    <%= f.label :login %><br />
+	    <%= f.text_field :login %>
+	  </p>
+	  <p>
+	    <%= f.label :password, 'Hasło' %><br />
+	    <%= f.password_field :password %>
+	  </p>
+		<p>
+			<%= f.check_box :remember_me %> Zapamiętaj mnie na tym komputerze
+		</p>
+	  <div class="bottom">
+	  	<%= f.submit "Zaloguj się" %>
+	  </div>
+	<% end %>
+</div>

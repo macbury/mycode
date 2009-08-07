@@ -1,0 +1,22 @@
+<div class="content">
+	<h2>Ustawienia:</h2>
+	<% form_for @uzytkownik do |f| %>
+	<p>
+		<%= f.label :password, 'Hasło:' %>
+		<%= error_for @uzytkownik, :password %>
+		<br />
+		<%= f.password_field :password %>
+	</p>
+	<p>
+		<%= f.label :password_confirmation, 'Powtórz hasło:' %>
+		<%= error_for @uzytkownik, :password_confirmation %>
+		<br />
+		<%= f.password_field :password_confirmation %>
+	</p>
+	<p><%= f.submit 'Zmień hasło' %></p>
+	<% end %>
+</div>
+
+<div class="sidebar">
+	<%= render :partial => '/shared/sidebar', :locals => { :include_znajomi => true } %>
+</div>

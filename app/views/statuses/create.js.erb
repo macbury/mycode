@@ -1,0 +1,3 @@
+<% if @status.errors.empty? %>
+	addStatus(<%= @status.id %>, '<%= escape_javascript(render(:partial => @status)) %>', <%= @status.created_at.to_date.to_s(:number) %>, '<%= day_title(@status.created_at) %>', true);
+<% end %>

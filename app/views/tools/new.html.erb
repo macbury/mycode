@@ -1,0 +1,39 @@
+<div class="content">
+<h2><%= @tool.new_record? ? 'Nowe narzędzie:' : 'Edycja narzędzia:' %></h2>
+
+<% form_for(@tool) do |f| %>
+
+  <p>
+    <%= f.label :name, 'Nazwa:' %><%= error_for @tool, :name %>
+		<br />
+    <%= f.text_field :name, :style => 'width: 300px' %>
+  </p>
+  <p>
+    <%= f.label :typ, 'Typ:' %>
+    <%= f.select :typ, Tool.typy %>
+  </p>
+  <p>
+    <%= f.label :language, 'Język:' %>
+    <%= f.select :language, Tool.languages, :include_blank => '---' %>
+  </p>
+  <p>
+    <%= f.label :description, 'Opis(max. 500 znaków):' %>
+		<%= error_for @tool, :description %>
+		<br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :url, 'Link do narzędzia:' %>
+		<%= error_for @tool, :url %>
+		<br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.submit 'Zapisz' %>
+  </p>
+<% end %>
+</div>
+
+<div class="sidebar">
+	<%= render :partial => "/shared/sidebar", :locals => { :include_znajomi => true } %>
+</div>

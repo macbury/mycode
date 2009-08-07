@@ -1,0 +1,12 @@
+<li class="<%= cycle 'normal', 'alt' %>">
+	<div class="lang">
+		<%= tool.language_s.upcase %>
+	</div>
+	<div class="type">
+		<%= tool.type_s.upcase %>
+	</div>
+	<%= link_to tool.name, tool %>
+	<div class="description">
+		<%= tool.description %>
+	</div>
+</li>

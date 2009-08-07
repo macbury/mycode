@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  message: MyString
+  statusable_type: MyString
+  statusable_id: 1
+  uzytkownik_id: 1
+  icon: 1
+
+two:
+  message: MyString
+  statusable_type: MyString
+  statusable_id: 1
+  uzytkownik_id: 1
+  icon: 1

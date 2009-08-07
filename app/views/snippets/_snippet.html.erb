@@ -1,0 +1,8 @@
+<li>
+	<div class="desc">
+		<span class="created_at"><%= l snippet.created_at, :format => :long %></span>
+		<span class="lang"><%= snippet.language_s.upcase %></span>
+		<%= link_to snippet.name, snippet %>
+	</div>
+	<pre class="brush: <%= snippet.language_syntax %>;"><%= truncate snippet.code, :length => 255 %></pre>
+</li>

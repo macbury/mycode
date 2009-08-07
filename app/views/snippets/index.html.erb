@@ -1,0 +1,45 @@
+<% content_for :head do %>
+	<%= include_syntax_highlighter_assets(:themes => :midnight, :brushes => :all) %>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function () {
+			SyntaxHighlighter.config.bloggerMode = false;
+			SyntaxHighlighter.config.clipboardSwf = '/javascripts/clipboard.swf';
+			SyntaxHighlighter.defaults['font-size'] = '12px';
+			SyntaxHighlighter.defaults['wrap-lines'] = false;
+			SyntaxHighlighter.defaults['light'] = true;
+			SyntaxHighlighter.all();
+		});
+	</script>
+<% end %>
+<div class="content">
+	<%= link_to 'Dodaj nowy kod', new_snippet_path, :class => 'spec_button' if logged_in? && @current_uzytkownik.id == @uzytkownik.id %>
+	<h2>Moje kawałki kodu</h2>
+	<ul class="snippets" id="snippets">
+		<%= render :partial => @snippets %>
+	</ul>
+	<%= will_paginate @snippets %>
+</div>
+
+<div class="sidebar">
+	<%= render :partial => '/shared/sidebar', :locals => { :include_znajomi => false } %>
+	<% form_tag uzytkownik_snippets_path(@uzytkownik), :id => 'search_form' do %>
+		<%= hidden_field_tag :sortowanie, params[:sortowanie] || 0 %>
+		<%= hidden_field_tag :typ, params[:typ] || -1 %>
+		<%= hidden_field_tag :language, params[:language] || -1 %>
+		<%= text_field_tag :keyword, params[:search] %>
+	<% end %>
+	
+	<h3>Sortowanie:</h3>
+	<ul>
+		<%= filter_for :sortowanie, 0, 0, 'Alfabetycznie' %>
+		<%= filter_for :sortowanie, 1, 0, 'Ostatnio dodane' %>
+	</ul>
+	
+	<h3>Język:</h3>
+	<ul>
+		<%= filter_for :language, -1, -1, 'Wszystkie' %>
+		<% @languages.each do |index| %>
+			<%= filter_for :language, index, -1, Tool.languages(index) %>
+		<% end %>
+	</ul>
+</div>

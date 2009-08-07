@@ -1,0 +1,26 @@
+<div class="content">
+	<% form_for(@snippet) do |f| %>
+	<h2>
+		Kawałek kodu
+		<%= f.select :language, Tool.languages, :include_blank => 'RAW' %>
+	</h2>
+		<p>
+			<%= f.label :name, 'Nazwa' %><%= error_for @snippet, :name %><br />
+			<%= f.text_field :name %>
+		</p>
+	  <p>
+			<%= f.label :code, 'Kod' %><%= error_for @snippet, :code %><br />
+	    <%= f.text_area :code %>
+	  </p>
+	  <p>
+	    <%= f.submit 'Zapisz' %>
+			<% unless @snippet.new_record? %>
+				 albo <%= link_to 'Usuń', @snippet, :method => :delete %>
+			<% end %>
+	  </p>
+	<% end %>
+</div>
+
+<div class="sidebar">
+	<%= render :partial => '/shared/sidebar', :locals => { :include_znajomi => true } %>
+</div>

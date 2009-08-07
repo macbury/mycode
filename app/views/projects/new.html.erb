@@ -1,0 +1,47 @@
+<div class="content">
+	<h2><%= @project.new_record? ? 'Tworzenie projektu:' : 'Edycja projektu:' %></h2>
+	<% form_for(@project, :html => { :multipart => true }) do |f| %>
+
+	  <p>
+	    <%= f.label :name, 'Nazwa' %>
+			<%= error_for @project, :name %>
+			<br />
+	    <%= f.text_field :name %>
+	  </p>
+	  <p>
+	    <%= f.label :description, 'Opis' %>
+			<%= error_for @project, :description %><br />
+	    <%= f.text_area :description %>
+	  </p>
+		
+		<p>
+			<%= f.label :preview, 'Podgląd' %>
+			<%= error_for @project, :description %><br />
+			<%= f.file_field :preview %>
+		</p>
+	
+	  <p>
+	    <%= f.label :url %>
+			<%= error_for @project, :url %><br />
+	    <%= f.text_field :url %>
+	  </p>
+	
+		<p>
+			<%= f.label :used_tools, 'Użyte narzędzia' %><br />
+			<%= f.select :used_tools, @project.used_tools.map { |t| [t.name, t.id] }, :multiple => true %>
+		</p>
+		
+	  <p>
+			<% if @project.new_record? %>
+	    	<%= f.submit 'Dodaj' %>
+			<% else %>
+				<%= f.submit 'Zapisz' %> albo <%= link_to 'Usuń', @project, :method => :delete %>
+			<% end %>
+	  </p>
+	<% end %>
+	
+</div>
+
+<div class="sidebar">
+	<%= render :partial => '/shared/sidebar', :locals => { :include_znajomi => true } %>
+</div>

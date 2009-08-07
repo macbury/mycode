@@ -1,0 +1,6 @@
+$('#snippets').empty().append('<%= escape_javascript(render(:partial => @snippets)) %>');
+$('.pagination').remove();
+<% if @snippets.total_pages > @snippets.current_page %>
+$('#snippets').after('<%= escape_javascript(will_paginate(@snippets)) %>');
+<% end %>
+SyntaxHighlighter.highlight();

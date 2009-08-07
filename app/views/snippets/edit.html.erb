@@ -1,0 +1,28 @@
+<h1>Editing snippet</h1>
+
+<% form_for(@snippet) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :code %><br />
+    <%= f.text_area :code %>
+  </p>
+  <p>
+    <%= f.label :uzytkownik_id %><br />
+    <%= f.text_field :uzytkownik_id %>
+  </p>
+  <p>
+    <%= f.label :language %><br />
+    <%= f.text_field :language %>
+  </p>
+  <p>
+    <%= f.label :fork_id %><br />
+    <%= f.text_field :fork_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @snippet %> |
+<%= link_to 'Back', snippets_path %>

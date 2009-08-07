@@ -1,0 +1,36 @@
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function () {
+		last_update = <%= @time.to_s(:number) %>;
+		getStatuses();
+	});
+</script>
+<div class="content">
+	<% if logged_in? %>
+	<h3>
+		<label><%= @uzytkownik.id == @current_uzytkownik.id ? 'Nad czym teraz pracujesz?' : "Napisz wiadomość do użytkownika #{@uzytkownik.login}" %></label>
+		<span id="letters">500</span>
+	</h3>
+	<% form_for(Status.new) do |f| %>
+		<p><%= f.text_area :message, :value => @message %></p>
+	  <div class="bottom"><%= f.submit 'Dodaj'%></div>
+	<% end %>
+	<% end %>
+	<div id="statusy_container">
+		<% @grupy_statusow.each do | data, statusy | %>
+		<h4><%= day_title(data) %></h4>
+		<ul class="statusy" id="statusy_<%= data.to_date.to_s(:number) %>">
+			<%= render :partial => statusy %>
+		</ul>
+		<% end %>
+	</div>
+	<div class="clear"></div>
+	<% if !@statusy.nil? && @statusy.size == 10 %>
+	<div class="more">
+		<%= link_to 'Więcej', archiwum_uzytkownik_statuses_path(@uzytkownik) %>
+	</div>
+	<% end %>
+</div>
+
+<div class="sidebar">
+	<%= render :partial => '/shared/sidebar', :locals => { :include_znajomi => true } %>
+</div>

@@ -1,0 +1,7 @@
+<% if @tools.nil? || @tools.size == 0 %>
+	$('#search_tools :submit').fadeIn();
+	$('#tools').empty();
+<% else %>
+	$('#tools').empty().append('<%= escape_javascript(render(:partial => @tools)) %>');
+	$('#search_tools :submit').fadeOut()
+<% end %>

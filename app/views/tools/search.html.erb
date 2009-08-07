@@ -1,0 +1,16 @@
+<div class="content">
+	<h2>Dodawanie narzędzia:</h2>
+	<% form_tag new_tool_path, :id => 'search_tools', :method => :get do %>
+		<label>Nazwa narzędzia:</label>
+		<input type="text" name="name" value="" id="name" />
+		<%= submit_tag 'Utwórz nowe', :style => 'display:none' %>
+	<% end %>
+	
+	<ul class="tools" id="tools">
+		
+	</ul>
+</div>
+
+<div class="sidebar">
+	<%= render :partial => "/shared/sidebar", :locals => { :include_znajomi => true } %>
+</div>

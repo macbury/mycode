@@ -1,0 +1,15 @@
+<li id="status_<%= status.id %>">
+	<div class="avatar">
+		<%= image_tag status.uzytkownik.gravatar_url(:size => 32) %>
+	</div>
+	<div class="body">
+		<span class="time" id="date_<%= status.created_at.to_s(:number) %>"><%= status.created_at.strftime('%H:%M') %></span>
+		<%= status_title(status) %>
+		<% if logged_in? && self.current_uzytkownik.own?(status) %>
+			<small>(<%= link_to 'Usuń', status, :onClick => 'deleteStatus(this); return false;' %>)</small>
+		<% end %>
+		<div>
+			<%= parse status.message %>
+		</div>
+	</div>
+</li>

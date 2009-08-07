@@ -1,0 +1,53 @@
+
+<div class="user">
+	<% link_to profil_path(@uzytkownik) do %>
+		<%= image_tag @uzytkownik.gravatar_url(:size => 32) %>
+		<span><%= @uzytkownik.login %></span>
+	<% end %>
+</div>
+
+<ul>
+	<% if logged_in? && self.current_uzytkownik.id != @uzytkownik.id %>
+	<li>
+		<% if self.current_uzytkownik.obserwuje?(@uzytkownik) %>
+		<%= link_to 'Przestań obserwować', znajomosc_path(@uzytkownik.id), :method => :delete, :class => 'remove' %>
+		<% else %>
+		<%= link_to 'Zacznij obserwować', znajomosci_path(:znajomy_id => @uzytkownik.id), :method => :post, :class => 'add' %>
+		<% end %>
+	</li>
+	<% end %>
+	<%= sub_tab_for :wiadomosci, 'Wiadomości', uzytkownik_statuses_path(@uzytkownik), 'message'%>
+	<%= sub_tab_for :projects, 'Projekty', uzytkownik_projects_path(@uzytkownik), 'projects'%>
+	<%= sub_tab_for :tools, 'Narzędzia', uzytkownik_kits_path(@uzytkownik), 'tools'%>
+	<%= sub_tab_for :snippets, 'Kawałki kodu', uzytkownik_snippets_path(@uzytkownik), 'snippets'%>
+</ul>
+
+<% if include_znajomi %>
+	<% obserwowani = @uzytkownik.znajomi.all(:limit => 36, :order => 'znajomosci.created_at DESC') %>
+	<% if obserwowani.size > 0 %>
+	<h3>Obserwowani:</h3>
+	<ol>
+		<% for uzytkownik in obserwowani %>
+			<li>
+				<% link_to profil_path(uzytkownik) do %>
+				<%= image_tag uzytkownik.gravatar_url(:size => 24), :alt => uzytkownik.login %>	
+				<% end %>
+			</li>
+		<% end %>
+	</ol>
+	<% end %>
+	
+	<% obserwuja = Znajomosc.all(:conditions => { :znajomy_id => @uzytkownik.id }, :include => [:uzytkownik]).map(&:uzytkownik) %>
+	<% if obserwuja.size > 0 %>
+	<h3>Obserwuja:</h3>
+	<ol>
+		<% for uzytkownik in obserwuja %>
+			<li>
+				<% link_to profil_path(uzytkownik) do %>
+				<%= image_tag uzytkownik.gravatar_url(:size => 24), :alt => uzytkownik.login %>	
+				<% end %>
+			</li>
+		<% end %>
+	</ol>
+	<% end %>
+<% end %>

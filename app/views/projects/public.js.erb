@@ -1,0 +1,5 @@
+$('#projects').empty().append('<%= escape_javascript(render(:partial => @projects)) %>');
+$('.pagination').remove();
+<% if @projects.total_pages > @projects.current_page %>
+$('#snippets').after('<%= escape_javascript(will_paginate(@projects)) %>');
+<% end %>

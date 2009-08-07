@@ -1,0 +1,14 @@
+<div class="content">
+	<%= link_to 'Dodaj nowy projekt', new_project_path, :class => 'spec_button' if logged_in? && @current_uzytkownik.id == @uzytkownik.id %>
+	<h2>Moje Projekty</h2>
+	
+	<ul class="tools" id="tools">
+		<%= render :partial => @projects %>
+	</ul>
+	
+	<%= will_paginate @projects %>
+</div>
+
+<div class="sidebar">
+	<%= render :partial => '/shared/sidebar', :locals => { :include_znajomi => false } %>
+</div>

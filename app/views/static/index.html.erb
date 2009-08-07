@@ -1,0 +1,47 @@
+<div class="content">
+	<h2>Ostatnie wpisy:</h2>
+	<% @grupy_statusow.each do | data, statusy | %>
+	<h4><%= day_title(data) %></h4>
+	<ul class="statusy" id="statusy_<%= data.to_date.to_s(:number) %>">
+		<%= render :partial => statusy %>
+	</ul>
+	<% end %>
+	<%= will_paginate @statusy %>
+</div>
+
+<div class="sidebar">
+	<h2>Witaj na my-code.pl!</h2>
+	<div class="tresc">
+		<ul>
+			<li>Pokaż nad czym pracujesz</li>
+			<li>Pokaż z jakich narzędzi i rozwiązań korzystasz</li>
+			<li>Udostępnij swoje kawałki kodu</li>
+		</ul>
+	</div>
+
+
+	<h3>Ostatnio dodane narzędzia:</h3>
+	<ul>
+		<% for tool in Tool.all(:order => 'created_at DESC', :limit => 5) %>
+			<li><%= link_to tool.name, tool %></li>
+		<% end %>
+	</ul>
+	
+	<h3>Ostatnio dodane projekty:</h3>
+	<ul>
+		<% for project in Project.all(:order => 'created_at DESC', :limit => 5) %>
+			<li><%= link_to project.name, project %></li>
+		<% end %>
+	</ul>
+	
+	<h3>Ostatnio dołączyli:</h3>
+	<ol>
+		<% for uzytkownik in Uzytkownik.all(:limit => 36, :order => 'created_at DESC') %>
+			<li>
+				<% link_to profil_path(uzytkownik) do %>
+				<%= image_tag uzytkownik.gravatar_url(:size => 24), :alt => uzytkownik.login %>	
+				<% end %>
+			</li>
+		<% end %>
+	</ol>
+</div>

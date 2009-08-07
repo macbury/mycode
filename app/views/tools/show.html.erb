@@ -1,0 +1,67 @@
+<div class="content">
+	<%= link_to 'Edytuj narzędzie', edit_tool_path(@tool), :class => 'tool_button' if logged_in? %>
+	<% if logged_in? && @tool.own_by?(self.current_uzytkownik) %>
+		<%= link_to 'Usuń z moich narzędzi', kit_path(@tool.id), :method => :delete, :class => 'spec_button'%>
+	<% elsif logged_in? %>
+		<%= link_to 'Dodaj do moich narzędzi', kits_path(:tool_id => @tool.id), :method => :post, :class => 'spec_button' %>
+	<% end %>
+	<h2><%= link_to @tool.name, @tool.url, :target => "_blank" %></h2>
+
+	<p>
+	  <b>Język:</b>
+	  <%= @tool.language_s %>
+	</p>
+
+	<p>
+	  <b>Typ:</b>
+	  <%= Tool.typy(@tool.typ) %>
+	</p>
+
+	<p>
+	  <%= @tool.description %>
+	</p>
+	
+	<h3>Wykorzystane w projektach</h3>
+	<ul>
+		<% for project in @tool.projects %>
+			<li>
+				<%= link_to project.name, project %>
+			</li>
+		<% end %>
+	</ul>
+	
+	<% if logged_in? %>
+	<h3>
+		<label>Komentarze: </label>
+		<span id="letters">500</span>
+	</h3>
+	<% form_for(Status.new) do |f| %>
+		<p><%= f.text_area :message, :value => "##{@tool.name}:" %></p>
+	  <div class="bottom"><%= f.submit 'Dodaj'%></div>
+	<% end %>
+	<% end %>
+	
+	<div id="statusy_container">
+		<% @grupy_statusow.each do | data, statusy | %>
+		<h4><%= day_title(data) %></h4>
+		<ul class="statusy" id="statusy_<%= data.to_date.to_s(:number) %>">
+			<%= render :partial => statusy %>
+		</ul>
+		<% end %>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="sidebar">
+	<%= render :partial => "/shared/sidebar", :locals => { :include_znajomi => false }  if logged_in? %>
+	<h3>Korzystający z narzędzia:</h3>
+	<ol>
+		<% for uzytkownik in @tool.uzytkownicy.all(:limit => 36, :order => 'created_at DESC', :group => 'uzytkownicy.id') %>
+			<li>
+				<% link_to profil_path(uzytkownik) do %>
+				<%= image_tag uzytkownik.gravatar_url(:size => 24), :alt => uzytkownik.login %>	
+				<% end %>
+			</li>
+		<% end %>
+	</ol>
+</div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+   
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title><%= render_title %></title>
+		<%= rss_link('Najnowsze narzędzia', latest_tools_path) %>
+		<%= rss_link('Najnowsze projekty', latest_projects_path) %>
+		<%= stylesheet_link_tag "main", "autocomplete" %>
+		<%= javascript_include_tag 'jquery', 'jquery.autogrow', 'jquery.fcbkcomplete.js', 'application' %>
+		<%= javascript_tag "window._token = #{form_authenticity_token.inspect}" %>
+		<%= yield :head %>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function () {
+				<% flash.each do | type, message | %>
+					flash('<%= type %>', '<%= message %>');
+				<% end %>
+				<% flash.discard %>
+			});
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			
+			<div class="header">
+				<h1><a href="/">my-code.pl</a></h1>
+				<ul>
+					<%= tag_for :home, 'Strona główna', root_path, 'home' %>
+					<%= tag_for :projects, 'Projekty', public_projects_path, 'projects' %>
+					<%= tag_for :snippets, 'Kawałki kodu', public_snippets_path, 'snippets' %>
+					<%= tag_for :tools, 'Narzędzia', tools_path, 'tools' %>
+					<% if logged_in? %>
+					<%= tag_for :profil, 'Profil', profil_path(self.current_uzytkownik.login), 'profil' %>
+					<%= tag_for :ustawienia, 'Ustawienia', edit_uzytkownik_path(self.current_uzytkownik), 'options' %>
+					<li><%= link_to 'Wyloguj', logout_path, :class => 'logout' %></li>
+					<% else %>
+					<%= tag_for :logowanie, 'Logowanie', login_path, 'login' %>
+					<%= tag_for :rejestracja, 'Rejestracja', register_path, 'register' %>
+					<% end %>
+				</ul>
+			</div>
+			
+			<%= yield %>
+			
+			<div class="clear"></div>
+			<div class="footer">
+				2009 Arkadiusz Buras
+			</div>
+		</div>
+	</body>
+</html>
