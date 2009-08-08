@@ -12,7 +12,7 @@ class Tool < ActiveRecord::Base
   validates_length_of :url, :within => 3..255
   
   def self.languages(index=nil)
-    lang = ['Ruby', 'Python', 'Sql', 'HTML', 'VB', 'C++', 'C#', 'CSS', 'Java', 'JavaScript', 'Pascal']
+    lang = ['Ruby', 'Python', 'Sql', 'HTML', 'VB', 'C++', 'C#', 'CSS', 'Java', 'JavaScript', 'Pascal', 'ActionScript', 'Bash', 'Objective-C', 'Perl', 'PHP', ]
     
     if index
       return lang[index] rescue lang[0]

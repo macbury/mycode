@@ -106,20 +106,20 @@ class ToolsController < ApplicationController
 
   # PUT /tools/1
   # PUT /tools/1.xml
-  #def update
-  #  @tool = Tool.find(params[:id])
-  #
-  #  respond_to do |format|
-  #    if @tool.update_attributes(params[:tool])
-  #      flash[:notice] = 'Tool was successfully updated.'
-  #      format.html { redirect_to(@tool) }
-  #      format.xml  { head :ok }
-  #    else
-  #      format.html { render :action => "edit" }
-  #      format.xml  { render :xml => @tool.errors, :status => :unprocessable_entity }
-  #    end
-  #  end
-  #end
+  def update
+    @tool = Tool.find(params[:id])
+  
+    respond_to do |format|
+      if @tool.update_attributes(params[:tool])
+        flash[:notice] = 'Zapisano zmiany w narzędziu'
+        format.html { redirect_to(@tool) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @tool.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /tools/1
   # DELETE /tools/1.xml

@@ -4,5 +4,9 @@
 		<span class="lang"><%= snippet.language_s.upcase %></span>
 		<%= link_to snippet.name, snippet %>
 	</div>
-	<pre class="brush: <%= snippet.language_syntax %>;"><%= truncate snippet.code, :length => 255 %></pre>
+
+	<% cache "snippet_summary_#{snippet.id}" do %>
+		<%= highlight(snippet.language_syntax, truncate(snippet.code, :length=>255)) %>
+	<% end %>
+
 </li>

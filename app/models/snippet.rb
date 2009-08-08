@@ -14,11 +14,11 @@ class Snippet < ActiveRecord::Base
     uzytkownik.statuses.create( :message => "##{self.id}: dodaję nowy kawałek kodu" )
   end
   
-  def code=(c)
-    c.gsub!('<', '&lt;')
-    c.gsub!('>', '&gt;')
-    write_attribute :code, c
-  end
+  #def code=(c)
+  #  c.gsub!('<', '&lt;')
+  #  c.gsub!('>', '&gt;')
+  #  write_attribute :code, c
+  #end
   
   #def code
   #  c = read_attribute :code

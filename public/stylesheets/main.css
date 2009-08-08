@@ -15,7 +15,10 @@ h1, h2, h3, h4 {
 }
 
 pre {
-	font-size: 10px;
+	font-size: 12px;
+	overflow-x: auto;
+	border: 1px solid black;
+	padding: 5px;
 }
 
 h2 {
@@ -595,7 +598,7 @@ input[type="button"]:active, input[type="submit"]:active {
 	padding-top: 2px;
 }
 
-.snippets > li > pre {
+.snippets > li pre {
 	margin: 0;
 	padding: 0;
 }

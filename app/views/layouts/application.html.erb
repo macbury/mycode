@@ -7,7 +7,7 @@
 		<title><%= render_title %></title>
 		<%= rss_link('Najnowsze narzędzia', latest_tools_path) %>
 		<%= rss_link('Najnowsze projekty', latest_projects_path) %>
-		<%= stylesheet_link_tag "main", "autocomplete" %>
+		<%= stylesheet_link_tag "main", "autocomplete", "highlight" %>
 		<%= javascript_include_tag 'jquery', 'jquery.autogrow', 'jquery.fcbkcomplete.js', 'application' %>
 		<%= javascript_tag "window._token = #{form_authenticity_token.inspect}" %>
 		<%= yield :head %>

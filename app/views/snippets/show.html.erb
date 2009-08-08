@@ -1,22 +1,12 @@
-<% content_for :head do %>
-	<%= include_syntax_highlighter_assets(:themes => :midnight, :brushes => [@snippet.language_syntax]) %>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function () {
-			SyntaxHighlighter.config.bloggerMode = false;
-			SyntaxHighlighter.config.clipboardSwf = '/javascripts/clipboard.swf';
-			SyntaxHighlighter.defaults['font-size'] = '12px';
-			SyntaxHighlighter.defaults['wrap-lines'] = true;
-			SyntaxHighlighter.all();
-		});
-	</script>
-<% end %>
 <div class="content">
 	<%= link_to 'Edytuj kod', edit_snippet_path(@snippet), :class => 'spec_button' if logged_in? && self.current_uzytkownik.own?(@snippet) %>
 	<h2>
 		[<%= @snippet.language_s.upcase %>] <%= @snippet.name %>
 	</h2>
 	
-	<pre class="brush: <%= @snippet.language_syntax %>;"><%= @snippet.code %></pre>
+	<% cache do %>
+		<%= highlight(@snippet.language_syntax, @snippet.code) %>
+	<% end %>
 	
 	<% if logged_in? %>
 	<h3>

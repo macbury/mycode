@@ -1,16 +1,3 @@
-<% content_for :head do %>
-	<%= include_syntax_highlighter_assets(:themes => :midnight, :brushes => :all) %>
-	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function () {
-			SyntaxHighlighter.config.bloggerMode = false;
-			SyntaxHighlighter.config.clipboardSwf = '/javascripts/clipboard.swf';
-			SyntaxHighlighter.defaults['font-size'] = '12px';
-			SyntaxHighlighter.defaults['wrap-lines'] = false;
-			SyntaxHighlighter.defaults['light'] = true;
-			SyntaxHighlighter.all();
-		});
-	</script>
-<% end %>
 <div class="content">
 	<%= link_to 'Dodaj nowy kod', new_snippet_path, :class => 'spec_button' if logged_in? && @current_uzytkownik.id == @uzytkownik.id %>
 	<h2>Moje kawałki kodu</h2>
