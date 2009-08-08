@@ -1,7 +1,7 @@
 class StatusesController < ApplicationController
-  before_filter :login_required, :except => [:index, :show, :archiwum]
-  before_filter :get_uzytkownik, :only => [:index, :show, :archiwum]
-  before_filter :prepare_conditions, :only => [:index, :show, :archiwum]
+  before_filter :login_required, :except => [:index, :archiwum, :show]
+  before_filter :get_uzytkownik, :only => [:index, :archiwum]
+  before_filter :prepare_conditions, :only => [:index, :archiwum]
   
   sub_tab :wiadomosci
   def index
@@ -34,6 +34,7 @@ class StatusesController < ApplicationController
       format.html # index.html.erb
       format.js
       format.xml  { render :xml => @statusy }
+      format.rss
       format.json { render :json => @statusy }
     end
   end
@@ -52,7 +53,7 @@ class StatusesController < ApplicationController
   end
   
   def show
-    redirect_to root_path
+    @status = Status.find(params[:id])
   end
 
   # POST /statuses

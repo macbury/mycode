@@ -281,6 +281,10 @@ a:hover {
 	background-color: #646464;
 }
 
+.sidebar > ul > li > .rss {
+	background-image: url('/images/rss.png');
+}
+
 .sidebar > ul > li > .message {
 	background-image: url('/images/message.png');
 }
@@ -613,4 +617,19 @@ input[type="button"]:active, input[type="submit"]:active {
 	margin: 0 auto;
 	display: block;
 	text-align: center;
+}
+
+.status {
+	background: #fff;
+	-webkit-border-radius: 5px;
+	margin: 200px auto;
+	width: 400px;
+	font-size: 13px;
+	padding: 10px 15px;
+}
+
+.status > div {
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px dashed #ccc;
 }

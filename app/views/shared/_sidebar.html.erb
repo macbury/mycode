@@ -4,6 +4,7 @@
 		<%= image_tag @uzytkownik.gravatar_url(:size => 32) %>
 		<span><%= @uzytkownik.login %></span>
 	<% end %>
+	
 </div>
 
 <ul>
@@ -20,6 +21,7 @@
 	<%= sub_tab_for :projects, 'Projekty', uzytkownik_projects_path(@uzytkownik), 'projects'%>
 	<%= sub_tab_for :tools, 'Narzędzia', uzytkownik_kits_path(@uzytkownik), 'tools'%>
 	<%= sub_tab_for :snippets, 'Kawałki kodu', uzytkownik_snippets_path(@uzytkownik), 'snippets'%>
+	<li><%= link_to 'Kanał RSS', uzytkownik_statuses_path(@uzytkownik.login, :format => :rss), :class => 'rss' %></li>
 </ul>
 
 <% if include_znajomi %>

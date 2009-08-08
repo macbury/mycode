@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  
+
   helper_method :current_uzytkownik, :logged_in?, :current_session
   
   # Scrub sensitive parameters from your log

@@ -1,0 +1,9 @@
+<div class="status">
+	<div>
+		<h3><%= status_title @status %></h3>
+	</div>
+	<p>
+		<%= @status.message %>
+	</p>
+	<small>dodał <%= distance_of_time_in_words_to_now @status.created_at %> temu</small>
+</div>

@@ -36,4 +36,24 @@ module StatusesHelper
     return out
   end
   
+  def status_title_rss(status)
+     out = '' 
+     
+     out += status.uzytkownik.login
+     
+     if !status.statusable.nil?
+       out += ' > '
+       out += case status.statusable_type
+         when 'Snippet' then "##{status.statusable.name}"
+         when 'Tool' then "##{status.statusable.name}"
+         when 'Project' then "&#{status.statusable.name}"
+       end
+     elsif status.odbiorca_id
+       out += ' > '
+       out += status.odbiorca.login
+     end
+     
+     out
+  end
+
 end
