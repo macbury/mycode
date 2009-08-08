@@ -41,8 +41,9 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: mycode_development
+  database: my_1507
   pool: 5
-  username: root
-  password: haslo
+  username: my_1507a
+  password: alecool
   port: 3306
+  host: sql.mycode.megiteam.pl
