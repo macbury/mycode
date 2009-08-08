@@ -9,7 +9,7 @@ set :deploy_via, :remote_cache
 set :copy_exclude, %w(.git)
 set :git_shallow_clone, 1
 	 
-set :repository, "ssh://tomekzi@tomekzi.megiteam.pl/home/tomekzi/www/git/benefi.git"
+set :repository, "ssh://mycode@mycode.megiteam.pl/home/mycode/www/mycode/"
 set :scm_username, "tomekzi"
 set :scm_password, "bene99"
 
