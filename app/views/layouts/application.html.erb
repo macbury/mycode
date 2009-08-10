@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title><%= render_title %></title>
-		<%= rss_link("Aktywność użytkownika #{@uzytkownik.login}", uzytkownik_statuses_path(@uzytkownik.login, :format => :rss)) if @uzytkownik %>
+		<%= rss_link("Aktywność użytkownika #{@uzytkownik.login}", uzytkownik_statuses_path(@uzytkownik.login, :format => :rss)) if @uzytkownik && !@uzytkownik.new_record?  %>
 		<%= rss_link('Najnowsze narzędzia', latest_tools_path) %>
 		<%= rss_link('Najnowsze projekty', latest_projects_path) %>
 		<%= stylesheet_link_tag "main", "autocomplete", "highlight" %>
@@ -25,7 +25,7 @@
 		<div class="wrapper">
 			
 			<div class="header">
-				<h1><a href="/">my-code</a></h1>
+				<h1><a href="/">mycode</a></h1>
 				<ul>
 					<%= tag_for :home, 'Strona główna', root_path, 'home' %>
 					<%= tag_for :projects, 'Projekty', public_projects_path, 'projects' %>

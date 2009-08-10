@@ -4,7 +4,8 @@ class UzytkownikMailer < ActionMailer::Base
   def activate(uzytkownik)
     setup_email(uzytkownik)
     @subject    += 'Aktywacja konta'
-    @body[:url]  = "http://0.0.0.0:3000/activate/#{uzytkownik.perishable_token}"
+              
+    @body[:url]  = "http://mycode.megiteam.pl/activate/#{uzytkownik.perishable_token}"
   end
 
   def forgot_password(sent_at = Time.now)
@@ -19,9 +20,9 @@ class UzytkownikMailer < ActionMailer::Base
   protected
     def setup_email(uzytkownik)
       @recipients  = "#{uzytkownik.email}"
-      @subject     = "[my-code.pl] "
+      @subject     = "[mycode] "
       @sent_on     = Time.now
-      @from        = ActionMailer::Base.smtp_settings[:from]
+      @from        = ActionMailer::Base.smtp_settings[:user_name]
       @body[:uzytkownik] = uzytkownik
     end
 end

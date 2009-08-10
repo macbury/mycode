@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def render_title
-    main = 'my-code.pl'
+    main = 'mycode'
     main += " - #{@title}" unless @title.nil?
     return main
   end
